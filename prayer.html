@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayer for our Pastoral Area</title>
+    <style>
+        /* CSS Variables matching the main page */
+        :root {
+            --gold: #D4AF37;
+            --dark-blue: #1E3A8A;
+            --light-blue: #EFF6FF;
+            --green: #2E5B1D;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #FAFAFA;
+        }
+
+        /* Navigation */
+        header {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .logo-title img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--gold);
+        }
+
+        /* Page Header */
+        .page-header {
+            background-color: var(--light-blue);
+            padding: 3rem 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--gold);
+        }
+
+        .page-header h1 {
+            color: var(--dark-blue);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Main Content Layout */
+        .container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Prayer Card Styling */
+        .prayer-card {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            padding: 3rem 4rem;
+            border-top: 6px solid var(--gold);
+            position: relative;
+        }
+
+        .prayer-card::before {
+            content: '“';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 6rem;
+            color: var(--light-blue);
+            font-family: Georgia, serif;
+            line-height: 1;
+            z-index: 0;
+        }
+
+        .prayer-content {
+            position: relative;
+            z-index: 1;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 1.15rem;
+            color: var(--text-dark);
+        }
+
+        .prayer-title {
+            text-align: center;
+            color: var(--dark-blue);
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 600;
+        }
+
+        .prayer-content p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .prayer-content .invocation {
+            font-weight: bold;
+            color: var(--green);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+            text-align: left;
+        }
+
+        /* Specific styling for the "Together we pray" list */
+        .prayer-list {
+            list-style-type: none;
+            margin: 1.5rem 0 1.5rem 1rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--gold);
+        }
+
+        .prayer-list li {
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+
+        .prayer-list li::before {
+            content: '•';
+            color: var(--gold);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .prayer-content .amen {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--dark-blue);
+            margin-top: 3rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            color: #888;
+            text-align: center;
+            padding: 2rem 1rem;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .prayer-card {
+                padding: 2rem 1.5rem;
+            }
+            .prayer-title {
+                font-size: 1.5rem;
+            }
+            .prayer-content {
+                font-size: 1.05rem;
+            }
+            .prayer-content p {
+                text-align: left; /* Better readability on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo-title">
+                <img src="logo.jpg" alt="Pastoral Area Logo">
+                <span>Pastoral Area</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#calendar">Calendar</a></li>
+                    <li><a href="index.html#parishes">Our Parishes</a></li>
+                    <li><a href="news.html">News & Notices</a></li>
+                    <li><a href="prayer.html" class="active">Prayer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <div class="page-header">
+        <h1>Area Prayer</h1>
+        <p>A prayer for our shared journey of faith across the six parishes.</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="prayer-card">
+            <div class="prayer-content">
+                
+                <h2 class="prayer-title">A Prayer for the Clergy, Religious, and Faithful Laity of St. Brigid's Pastoral Area</h2>
+
+                <p class="invocation">Heavenly Father,</p>
+                <p>We come before you in humility and hope, gathered as one people across six parishes — Newbridge, Caragh, Allen, Suncroft, Prosperous, and St. Brigid's Parish–The Curragh — yet bound together as a single family of faith under the patronage of St. Brigid of Kildare.</p>
+
+                <p class="invocation">Lord Jesus Christ,</p>
+                <p>You called your disciples to leave their nets and follow you. We thank you for the priests, deacons and religious of this pastoral area who have answered that call; those who rise early and labour late, who anoint the sick, break the Bread of Life, baptise the young, bury the dead, and walk with your people through every season of joy and sorrow. Strengthen them when they are weary. Sustain them when their numbers feel few and the burden heavy. Guard their hearts against discouragement, and let them know, deeply and unmistakably, that they are loved and needed by the people they serve.</p>
+
+                <p class="invocation">Holy Spirit,</p>
+                <p>You poured out your gifts upon the faithful at Baptism and Confirmation. We thank you for the lay men and women of these six parishes; pastoral workers, catechists and sacristans, readers and extraordinary ministers of Holy Communion, choir members and church cleaners, those who welcome, those who count, those who visit the housebound, and all who quietly serve without recognition. Kindle in them a renewed confidence in their vocation. Help them to see that the Church is not a building but a people, and that their hands are the hands of Christ in Newbridge and Caragh, in Allen and Suncroft, in Prosperous and The Curragh.</p>
+
+                <p class="invocation">St. Brigid,</p>
+                <p>Woman of faith, friend of the poor, maker of peace, and keeper of the flame, you understood that the light must never go out. Watch over this pastoral area that bears your name. Teach us your hospitality, that we may welcome the stranger and the returning child alike. Teach us your courage, that we may speak truth with gentleness. Teach us your generosity, that we may share what we have without counting the cost. And above all, teach us to tend the flame of faith in one another, so that no heart in our communities is left in darkness.</p>
+
+                <p style="margin-top: 2rem; font-weight: bold; color: var(--dark-blue);">Together, as one people, we pray:</p>
+                
+                <ul class="prayer-list">
+                    <li>That our six parishes may never close in on themselves, but open outward in mission and service to every person who lives among us.</li>
+                    <li>That our clergy and laity may work side by side in trust and mutual respect, each honouring the gifts of the other.</li>
+                    <li>That young people may find a home in your Church and a reason to believe.</li>
+                    <li>That the sick, the lonely, the grieving, and the forgotten may feel the nearness of your love through our hands and our presence.</li>
+                    <li>That the dead, marked with the sign of faith, may share in the resurrection of your Son.</li>
+                </ul>
+
+                <p>And may all of us, clergy and people, religious and laity, young and old, be found faithful when the Lord comes again, so that the flame lit in Kildare by St. Brigid may burn brightly in our hearts until the end of time.</p>
+
+                <p>Through Christ our Lord.</p>
+
+                <p class="amen">Amen.</p>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Pastoral Area Shared Calendar. All rights reserved.</p>
+        <p>Maintained by the Pastoral Area Coordinator.</p>
+    </footer>
+
+</body>
+</html>

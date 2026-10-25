@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St. Brigid's Pastoral Area Shared Calendar</title>
+    <style>
+        /* CSS Variables for consistent colours drawn from the logo */
+        :root {
+            --gold: #D4AF37;
+            --dark-blue: #1E3A8A;
+            --light-blue: #EFF6FF;
+            --green: #2E5B1D;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #FAFAFA;
+        }
+
+        /* Navigation */
+        header {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .logo-title img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--light-blue);
+            padding: 4rem 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--gold);
+        }
+
+        .hero h1 {
+            color: var(--dark-blue);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-light);
+        }
+
+        /* Main Content Containers */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--dark-blue);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--gold);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Poster Section */
+        .poster-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+        }
+
+        .poster-image {
+            flex: 1 1 300px;
+        }
+
+        .poster-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .poster-text {
+            flex: 1 1 300px;
+        }
+
+        .poster-text h2 {
+            color: var(--green);
+            margin-bottom: 1rem;
+        }
+
+        .poster-text p {
+            margin-bottom: 1rem;
+        }
+
+        /* Calendar Section */
+        .calendar-section {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+        }
+
+        .calendar-placeholder {
+            width: 100%;
+            height: 600px;
+            background-color: var(--light-blue);
+            border: 2px dashed #B0C4DE;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--gold);
+            color: var(--dark-blue);
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #C5A028;
+        }
+
+        /* Parishes Grid */
+        .parishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .parish-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-top: 5px solid var(--green);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .parish-card h3 {
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        .parish-card p {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .placeholder-text {
+            color: #d9534f;
+            font-weight: bold;
+            background: #fdf7f7;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        /* Submit & Contact Section */
+        .contact-section {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 4rem 1rem;
+            border-radius: 10px;
+            margin-top: 3rem;
+        }
+
+        .contact-section h2 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .contact-section p {
+            margin-bottom: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            color: #888;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="nav-container">
+            <div class="logo-title">
+                <!-- Make sure your logo image is named logo.png -->
+                <img src="logo.png" alt="Pastoral Area Logo">
+                <span>St. Brigid's Pastoral Area</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#calendar">Calendar</a></li>
+                    <li><a href="#parishes">Our Parishes</a></li>
+                    <li><a href="#submit">Submit Event</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>Six Parishes, One Community</h1>
+        <p>Welcome to the official shared calendar for St. Brigid's Pastoral Area. This is your single point of reference for Mass times, sacraments, community events, and shared gatherings across all six parishes.</p>
+    </section>
+
+    <div class="container">
+        
+        <!-- Poster Highlight Section -->
+        <section class="poster-section">
+            <div class="poster-image">
+                <!-- Make sure your poster image is named poster.png -->
+                <img src="poster.png" alt="Collage of the six parish churches">
+            </div>
+            <div class="poster-text">
+                <h2>Walking Together in Faith</h2>
+                <p>While we each have our own unique church buildings and local communities, we are united as one Pastoral Area under the patronage of St. Brigid, Patroness of Ireland. This website ensures that no matter which parish you belong to, you can easily see what is happening across our shared family.</p>
+                <p>Use the calendar below to stay informed, or sync it directly to your phone.</p>
+                <a href="#calendar" class="btn">View the Calendar</a>
+            </div>
+        </section>
+
+        <!-- Calendar Section -->
+        <section id="calendar" class="calendar-section">
+            <h2 class="section-title">St. Brigid's Pastoral Area Calendar</h2>
+            
+            <!-- GOOGLE CALENDAR EMBED GOES HERE -->
+            <iframe src="https://calendar.google.com/calendar/embed?src=stbrigidspastoralarea%40gmail.com&ctz=Europe%2FDublin" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+            
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <p><strong>Want this on your phone?</strong> <a href="#" style="color: var(--dark-blue); font-weight: bold;">Click here to subscribe to the calendar (ICS link)</a></p>
+            </div>
+        </section>
+
+        <!-- Parishes Section -->
+        <section id="parishes">
+            <h2 class="section-title">Our Six Parishes</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">Click a parish to view their specific details. <em>(Replace the placeholder text below with your actual parish information).</em></p>
+            
+            <div class="parishes-grid">
+                <!-- Parish 1 -->
+                <div class="parish-card">
+                    <h3><span class="placeholder-text">Parish 1 Name</span></h3>
+                    <p><strong>Address:</strong> <span class="placeholder-text">123 Church St, Town</span></p>
+                    <p><strong>Weekend Masses:</strong> <span class="placeholder-text">Sat 6:30pm, Sun 10:00am</span></p>
+                    <p><strong>Contact:</strong> <span class="placeholder-text">(01) 123 4567</span></p>
+                </div>
+                
+                <!-- Parish 2 -->
+                <div class="parish-card">
+                    <h3><span class="placeholder-text">Parish 2 Name</span></h3>
+                    <p><strong>Address:</strong> <span class="placeholder-text">45 Main Rd, Town</span></p>
+                    <p><strong>Weekend Masses:</strong> <span class="placeholder-text">Sat 7:00pm, Sun 11:30am</span></p>
+                    <p><strong>Contact:</strong> <span class="placeholder-text">(01) 234 5678</span></p>
+                </div>
+
+                <!-- Parish 3 -->
+                <div class="parish-card">
+                    <h3><span class="placeholder-text">Parish 3 Name</span></h3>
+                    <p><strong>Address:</strong> <span class="placeholder-text">78 Hill View, Town</span></p>
+                    <p><strong>Weekend Masses:</strong> <span class="placeholder-text">Sun 9:00am, Sun 12:00pm</span></p>
+                    <p><strong>Contact:</strong> <span class="placeholder-text">(01) 345 6789</span></p>
+                </div>
+
+                <!-- Parish 4 -->
+                <div class="parish-card">
+                    <h3><span class="placeholder-text">Parish 4 Name</span></h3>
+                    <p><strong>Address:</strong> <span class="placeholder-text">12 Green Park, Town</span></p>
+                    <p><strong>Weekend Masses:</strong> <span class="placeholder-text">Sat 6:00pm, Sun 10:30am</span></p>
+                    <p><strong>Contact:</strong> <span class="placeholder-text">(01) 456 7890</span></p>
+                </div>
+
+                <!-- Parish 5 -->
+                <div class="parish-card">
+                    <h3><span class="placeholder-text">Parish 5 Name</span></h3>
+                    <p><strong>Address:</strong> <span class="placeholder-text">99 River Way, Town</span></p>
+                    <p><strong>Weekend Masses:</strong> <span class="placeholder-text">Sun 8:30am, Sun 11:00am</span></p>
+                    <p><strong>Contact:</strong> <span class="placeholder-text">(01) 567 8901</span></p>
+                </div>
+
+                <!-- Parish 6 -->
+                <div class="parish-card">
+                    <h3><span class="placeholder-text">Parish 6 Name</span></h3>
+                    <p><strong>Address:</strong> <span class="placeholder-text">5 The Square, Town</span></p>
+                    <p><strong>Weekend Masses:</strong> <span class="placeholder-text">Sat 7:30pm, Sun 9:30am</span></p>
+                    <p><strong>Contact:</strong> <span class="placeholder-text">086-3816133</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Submit Event & Contact -->
+        <section id="submit" class="contact-section">
+            <h2>Submit an Event</h2>
+            <p>To ensure the calendar remains a reliable point of reference, all events must be submitted by the Parish Secretary or a designated volunteer.</p>
+            <p><strong>Submission Deadline:</strong> Thursdays at 12:00 PM for the following week.</p>
+            <a href="mailto:stbrigidspastoralarea@gmail.com" class="btn">Email the Calendar Coordinator</a>
+            <p style="margin-top: 1rem; font-size: 0.9rem;"><em>(Replace the email link above with your actual coordinator's email address)</em></p>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Pastoral Area Shared Calendar. All rights reserved.</p>
+        <p>Maintained by the Pastoral Area Calendar Coordinator.</p>
+    </footer>
+
+</body>
+</html>

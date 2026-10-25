@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Notices - Pastoral Area</title>
+    <style>
+        /* CSS Variables matching the main page */
+        :root {
+            --gold: #D4AF37;
+            --dark-blue: #1E3A8A;
+            --light-blue: #EFF6FF;
+            --green: #2E5B1D;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #FAFAFA;
+        }
+
+        /* Navigation */
+        header {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .logo-title img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--gold);
+        }
+
+        /* Page Header */
+        .page-header {
+            background-color: var(--light-blue);
+            padding: 3rem 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--gold);
+        }
+
+        .page-header h1 {
+            color: var(--dark-blue);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-light);
+        }
+
+        /* Submission Banner */
+        .submit-banner {
+            background-color: var(--green);
+            color: var(--white);
+            text-align: center;
+            padding: 1.5rem 1rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 1200px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .submit-banner h2 {
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .submit-banner a {
+            color: var(--white);
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .submit-banner a:hover {
+            color: var(--gold);
+        }
+
+        /* Main Content Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem 3rem 1rem;
+        }
+
+        /* Parish News Sections */
+        .parish-section {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+            overflow: hidden;
+        }
+
+        .parish-header {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-left: 8px solid var(--gold);
+        }
+
+        .parish-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .parish-content {
+            padding: 2rem;
+        }
+
+        /* Blog Post Styling */
+        .news-item {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .news-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .news-image {
+            flex: 1 1 300px;
+            max-width: 400px;
+        }
+
+        .news-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .news-text {
+            flex: 2 1 400px;
+        }
+
+        .news-date {
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .news-text h3 {
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .news-text p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        /* Placeholder text styling */
+        .placeholder-text {
+            color: #d9534f;
+            font-weight: bold;
+            background: #fdf7f7;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            color: #888;
+            text-align: center;
+            padding: 2rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .news-image {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo-title">
+                <img src="logo.jpg" alt="Pastoral Area Logo">
+                <span>Pastoral Area</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#calendar">Calendar</a></li>
+                    <li><a href="index.html#parishes">Our Parishes</a></li>
+                    <li><a href="news.html" class="active">News & Notices</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <div class="page-header">
+        <h1>News & Notices</h1>
+        <p>Stay up to date with the latest news, announcements, and community updates from across our six parishes.</p>
+    </div>
+
+    <div class="container">
+        
+        <!-- Submission Banner -->
+        <div class="submit-banner">
+            <h2>Submit News or Photos</h2>
+            <p>To have your parish news, notices, or photos included on this page, please email them to:</p>
+            <p style="font-size: 1.2rem; margin-top: 10px;">
+                <a href="mailto:stbrigidspastoralarea@gmail.com">stbrigidspastoralarea@gmail.com</a>
+            </p>
+            <p style="font-size: 0.9rem; margin-top: 5px; opacity: 0.9;">(Please include the parish name in the subject line)</p>
+        </div>
+
+        <!-- 1. Newbridge Parish -->
+        <div class="parish-section">
+            <div class="parish-header">
+                <h2>Newbridge Parish</h2>
+            </div>
+            <div class="parish-content">
+                <!-- Sample News Item - Duplicate this block for more news -->
+                <div class="news-item">
+                    <div class="news-text">
+                        <span class="news-date">Week of October 20th</span>
+                        <h3><span class="placeholder-text">Parish News Headline Here</span></h3>
+                        <p>This is where the main text of the news update goes. It could be a notice about an upcoming Parish Pastoral Council meeting, a note of thanks for a recent fundraising event, or an update on the church renovations.</p>
+                        <p>You can write a few paragraphs here. To add a photo, simply replace the placeholder image on the left with the actual photo file.</p>
+                    </div>
+                </div>
+                <!-- End of Sample News Item -->
+            </div>
+        </div>
+
+        <!-- 2. Caragh Parish -->
+        <div class="parish-section">
+            <div class="parish-header">
+                <h2>Caragh Parish</h2>
+            </div>
+            <div class="parish-content">
+                <div class="news-item">
+                    <div class="news-text">
+                        <span class="news-date">Announcement</span>
+                        <h3><span class="placeholder-text">Baptism Preparation Course</span></h3>
+                        <p>The next baptism preparation course for parents will take place in the Parish Centre. Please contact the parish office to register your interest. We look forward to welcoming you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Allen Parish -->
+        <div class="parish-section">
+            <div class="parish-header">
+                <h2>Allen Parish</h2>
+            </div>
+            <div class="parish-content">
+                <div class="news-item">
+                    <div class="news-text">
+                        <span class="news-date">Community Update</span>
+                        <h3><span class="placeholder-text">Recent Church Clean-Up</span></h3>
+                        <p>A huge thank you to all the volunteers who came out to help clean the church and tidy the grounds last weekend. Your time and effort are greatly appreciated and make a huge difference to our beautiful church.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Suncroft Parish -->
+        <div class="parish-section">
+            <div class="parish-header">
+                <h2>Suncroft Parish</h2>
+            </div>
+            <div class="parish-content">
+                <div class="news-item">
+                    <div class="news-text">
+                        <span class="news-date">Upcoming Event</span>
+                        <h3><span class="placeholder-text">Christmas Fair Notice</span></h3>
+                        <p>Preparations are underway for this year's Christmas Fair. We are currently looking for donations of raffle prizes, bottles for the bottle stall, and volunteers to help on the day. Please email the pastoral area address to get involved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Prosperous Parish -->
+        <div class="parish-section">
+            <div class="parish-header">
+                <h2>Prosperous Parish</h2>
+            </div>
+            <div class="parish-content">
+                <div class="news-item">
+                    <div class="news-text">
+                        <span class="news-date">Liturgical Notice</span>
+                        <h3><span class="placeholder-text">Altar Servers Training</span></h3>
+                        <p>Training for new altar servers will take place this Saturday morning at 10:30 AM. Any young person who has made their First Holy Communion and would like to serve at the altar is very welcome to attend.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. St. Brigid's Parish, The Curragh -->
+        <div class="parish-section">
+            <div class="parish-header">
+                <h2>St. Brigid's Parish, The Curragh</h2>
+            </div>
+            <div class="parish-content">
+                <div class="news-item">
+                    <!-- Sample with a photo placeholder -->
+                    <div class="news-image">
+                        <!-- Replace 'poster.jpg' with the name of a local photo, or remove this div if no photo -->
+                        <img src="poster.jpg" alt="St Brigid's Parish Event">
+                    </div>
+                    <div class="news-text">
+                        <span class="news-date">Parish Event</span>
+                        <h3><span class="placeholder-text">Community Coffee Morning</span></h3>
+                        <p>Thank you to everyone who attended our recent community coffee morning in the parish hall. It was wonderful to see so many familiar faces and new members of the community coming together for a chat and a cup of tea.</p>
+                        <p>Photos from the morning are now available. Please email the coordinator if you would like a copy of any of the pictures.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Pastoral Area Shared Calendar & News. All rights reserved.</p>
+        <p>Maintained by the Pastoral Area Coordinator.</p>
+    </footer>
+
+</body>
+</html>
